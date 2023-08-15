@@ -21,7 +21,7 @@
 </head>
 <%@ include file="../toolbar/navbar.jsp"%>
 
-<body style="padding-top: 8%" id="app">
+<body style="padding-top: 9%" id="app">
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~table~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -115,7 +115,7 @@
 							</div>
 							
 							<div v-if="new Date(item.suppliersEndDate)<tomorrowDate">
-							<i class="fa-solid fa-x" style="color: #ff0000;"></i>已終止
+							<i class="fa-solid fa-person-circle-xmark" style="color: #ff0000;"></i>已終止
 							</div>
 							
 							</td>

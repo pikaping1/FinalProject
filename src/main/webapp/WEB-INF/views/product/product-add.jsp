@@ -53,8 +53,8 @@
 						v-model="suppliersId" name="suppliersId">
 						<!-- <option selected>選擇廠商編號</option> -->
 						<option v-for="suppliersId in filteredSuppliersIds"
-							:key="suppliersId" :value="suppliersId">
-							{{ suppliersId }}</option>
+							:key="suppliersId" :value="suppliersId">{{ suppliersId
+							}}</option>
 					</select>
 				</div>
 
@@ -64,8 +64,8 @@
 						v-model="contractsId" name="contractsId">
 						<!-- <option selected value="">選擇合約編號</option> -->
 						<option v-for="contractsId in filteredContractsIds"
-							:key="contractsId" :value="contractsId">
-							{{ contractsId }}</option>
+							:key="contractsId" :value="contractsId">{{ contractsId
+							}}</option>
 					</select>
 				</div>
 
@@ -75,8 +75,8 @@
 						v-model="categoriesId" name="categoriesId">
 						<!-- <option selected>選擇商品分類</option> -->
 						<option v-for="categoriesId in filteredCategoriesIds"
-							:key="categoriesId" :value="categoriesId">
-							{{ categoriesId }}</option>
+							:key="categoriesId" :value="categoriesId">{{
+							categoriesId }}</option>
 					</select>
 				</div>
 
@@ -90,7 +90,7 @@
 
 				<div class="mb-3">
 					<label for="productsSpecification" class="form-label">商品規格</label>
-					<textarea class="form-control" id="productsSpecification	"
+					<textarea class="form-control" id="productsSpecification"
 						v-model="productsSpecification"></textarea>
 				</div>
 
@@ -108,7 +108,7 @@
 
 				<div class="mb-3 row">
 					<label for="cost" class="col-form-label col-sm-4">商品成本</label> <input
-						type="number" class="col-form-control col-sm-8" id="cost	"
+						type="number" class="col-form-control col-sm-8" id="cost"
 						v-model="cost" />
 				</div>
 
@@ -119,8 +119,8 @@
 				</div>
 
 				<div class="mb-3 row">
-					<label for="total" class="col-form-label col-sm-4">商品總數量</label>
-					<input type="number" class="col-form-control col-sm-8" id="total	"
+					<label for="total" class="col-form-label col-sm-4">商品總數量</label> <input
+						type="number" class="col-form-control col-sm-8" id="total"
 						v-model="total" />
 				</div>
 

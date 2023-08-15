@@ -21,7 +21,7 @@ import com.ispan.buyallgoods.service.MembersService;
 
 @RestController
 @RequestMapping(path = "/members")
-public class MembersController {
+public class MembersControllerByP {
 
 	@Autowired
 	private MembersService mSer;

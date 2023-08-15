@@ -1,6 +1,7 @@
 const app = Vue.createApp({
   components: {
-    "file-upload": VueUploadComponent,},
+    "file-upload": VueUploadComponent,
+  },
   data: function () {
     return {
       productsOneData: [],
@@ -36,7 +37,10 @@ const app = Vue.createApp({
       selectedFile: null,
       //未更新圖片時顯示原始圖片
       // previewUrl: contextPath + "/pic/product/"+this.name+".jpg",
-      previewUrl:''
+      previewUrl: "",
+
+      //下架商品的訊息
+      finishMessage: "",
     };
   },
   computed: {
@@ -64,6 +68,78 @@ const app = Vue.createApp({
     },
   },
   methods: {
+    //商品下架按鈕功能
+    callFinishProductDateByPId: function () {
+      let request = {
+        productsId: this.productsId,
+        categoriesId: this.categoriesId,
+        contractsId: this.contractsId,
+        name: this.name,
+        productsSpecification: this.productsSpecification,
+        productsDescription: this.productsDescription,
+        imagePath: this.imagePath,
+        sellingPrice: this.sellingPrice,
+        cost: this.cost,
+        lowestPrice: this.lowestPrice,
+        total: this.total,
+        orderQuantity: this.orderQuantity,
+        soldQuantity: this.soldQuantity,
+        suppliersId: this.suppliersId,
+        expiryDate: this.expiryDate,
+        sellingStartDate: this.sellingStartDate,
+        sellingStopDate: this.sellingStopDate,
+        discountStartDate: this.discountStartDate,
+        discountEndDate: this.discountEndDate,
+        discount: this.discount,
+        staffId: this.staffId,
+        createdDate: this.createdDate,
+      };
+      bootbox.confirm({
+        title: "再次確認！",
+        message:
+          '<div class="text-center">' + "確認要下架此商品嗎？" + "</div>",
+        buttons: {
+          confirm: {
+            label: "確認",
+            className: "btn-success",
+          },
+          cancel: {
+            label: "返回",
+            className: "btn-danger",
+          },
+        },
+        callback: (result) => {
+          //確認就往下修改
+          if (result) {
+            let pika = this;
+            axios
+              .post(contextPath + "/product/finishProductDateByPId", request)
+              .then(function (response) {
+                pika.finishMessage = response.data;
+              })
+              .catch(function () {})
+              .finally(function () {
+                //開始
+                bootbox.alert({
+                  title: "訊息！",
+                  message:
+                    '<div class="text-center">' + pika.finishMessage + "</div>",
+                  buttons: {
+                    ok: { label: "關閉", className: "btn btn-warning" },
+                  },
+                  callback: function () {
+                    //回到商品查詢頁
+                    const url = contextPath + "/product-list";
+                    window.location.href = url;
+                  },
+                });
+              });
+          } else {
+          }
+        },
+      });
+    },
+
     findById: function (productsId) {
       let vm = this;
       axios
@@ -94,9 +170,8 @@ const app = Vue.createApp({
           vm.staffId = response.data.staffId;
           vm.createdDate = response.data.createdDate;
 
-          // 當畫面一載入時，自動顯示當前圖片          
+          // 當畫面一載入時，自動顯示當前圖片
           vm.previewUrl = contextPath + "/pic/product/" + vm.name + ".jpg"; // 設定 this.previewUrl
-
         })
         .catch(function (error) {
           console.error("資料請求失敗：", error);
@@ -265,7 +340,6 @@ const app = Vue.createApp({
     },
     // 按下選擇檔案後預覽圖片
     previewImage: function (event) {
-
       const file = event.target.files[0];
       if (file) {
         this.selectedFile = file;
@@ -276,8 +350,7 @@ const app = Vue.createApp({
         }.bind(this);
 
         reader.readAsDataURL(file);
-        }
-     
+      }
     },
 
     checkFile: function (uploadFiles) {
@@ -285,7 +358,7 @@ const app = Vue.createApp({
         alert("請選擇檔案");
         return false;
       }
-  
+
       let uploadFile = uploadFiles[0];
       if (uploadFile.size > 10000000) {
         alert("檔案大小超出限制(10M)");
@@ -313,11 +386,9 @@ const app = Vue.createApp({
           },
         })
         .then(function (response) {
-          
-          
           alert(response.data.message);
           // console.log("vm.previewUrl="+vm.previewUrl)
-          console.log(contextPath + "/pic/product/" + vm.name + ".jpg")
+          console.log(contextPath + "/pic/product/" + vm.name + ".jpg");
           // vm.previewUrl = response.data.imagePath;
           vm.files = [];
           vm.desc = null;
@@ -331,10 +402,8 @@ const app = Vue.createApp({
         })
         .finally(function () {});
     },
-
   },
   mounted: function () {
-    
     // Get the productsId from the URL
     const urlParams = new URLSearchParams(window.location.search);
     const productsId = urlParams.get("productsId");

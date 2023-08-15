@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.ispan.buyallgoods.model.ContractsBean;
 import com.ispan.buyallgoods.model.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
@@ -81,4 +82,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	    List<Product> findByCustomQuery(@Param("name") String name,
 	                                    @Param("suppliersId") Integer suppliersId,
 	                                    @Param("contractsId") Integer contractsId);
+
+
+
 }

@@ -26,7 +26,8 @@
 	<div class="container">
 		<p style="font-size: 30px; text-align: center; margin-bottom: 10px">
 			合約明細</p>
-			<p style="font-size: 14px; text-align: center; margin-bottom: 10px ;color:red">
+		<p
+			style="font-size: 14px; text-align: center; margin-bottom: 10px; color: red">
 			{{hintFinishMessage}}</p>
 
 		<!--流水編號(合約ID)欄位-->
@@ -80,11 +81,11 @@
 			</div>
 			<div class="col-auto text-center">
 				<input type="date" id="" class="form-control" required
-					v-model="findStartDate" @blur="checkStartDate()" />
+					v-model="findStartDate" @blur="checkStartDate(findSuppliersId)" />
 			</div>
 			<div class="col-auto text-center">
 				<span id="" class="form-text" style="color: red">
-					{{startDateMessage}} </span>
+					{{startDateMessage}} {{overSigningDateMessage}}</span>
 			</div>
 		</div>
 
@@ -96,10 +97,17 @@
 			</div>
 			<div class="col-auto text-center">
 				<input type="date" id="" class="form-control" v-model="findEndDate"
-					@blur="checkEndDate()" />
+					@blur="checkEndDate(findSuppliersId)" />
 			</div>
 			<div class="col-auto text-center">
-				<span id="" class="form-text" style="color: red">
+				<span id="" class="form-text" style="color: red"
+					v-if="endDateMessage!=''&&overSupplierEndDateMessage!=''">
+					1.{{endDateMessage}} 2.{{overSupplierEndDateMessage}}</span> <span id=""
+					class="form-text" style="color: red"
+					v-if="endDateMessage==''&&overSupplierEndDateMessage!=''">
+					{{overSupplierEndDateMessage}}</span> <span id="" class="form-text"
+					style="color: red"
+					v-if="endDateMessage!=''&&overSupplierEndDateMessage==''">
 					{{endDateMessage}}</span>
 			</div>
 		</div>
@@ -135,7 +143,7 @@
 				@click="callAddContractsToUpdate()">編輯</button>
 			<a href="<c:url value="/showSupplierPage"></c:url>"><button
 					class="btn btn-outline-dark mx-5">回查詢頁</button></a>
-					<button class="btn btn-outline-danger mx-5"
+			<button class="btn btn-outline-danger mx-5"
 				@click="callFinishContracts()">終止合約</button>
 		</div>
 	</div>
