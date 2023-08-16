@@ -171,7 +171,6 @@
 					<label for="discountEndDate" class="col-form-label col-sm-4">優惠期間結束日期</label>
 					<input type="date" class="col-form-control col-sm-8"
 						id="discountEndDate" v-model="discountEndDate" @blur="checkDiscountStopDate()"/>
-						
 						 <span id="" class="form-text"
 						style="color: red"
 						v-if="discountDateMessage!=''&&discountSellingStopDateMessage!=''">
