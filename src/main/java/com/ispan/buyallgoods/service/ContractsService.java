@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ispan.buyallgoods.model.ContractsBean;
+import com.ispan.buyallgoods.model.Product;
 import com.ispan.buyallgoods.model.SuppliersBean;
 import com.ispan.buyallgoods.repository.ContractsRepository;
 
@@ -108,5 +109,5 @@ public class ContractsService {
 		return "刪除失敗";
 
 	}
-
+	
 }

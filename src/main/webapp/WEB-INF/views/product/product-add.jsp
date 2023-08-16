@@ -127,31 +127,61 @@
 				<div class="mb-3 row">
 					<label for="expiryDate" class="col-form-label col-sm-4">商品有效期限</label>
 					<input type="date" class="col-form-control col-sm-8"
-						id="expiryDate" v-model="expiryDate" />
+						id="expiryDate" v-model="expiryDate" @blur="checkExpiryDate()" />
+					<span id="" class="form-text" style="color: red">{{expiryDateMessage}}</span>
 				</div>
 
 				<div class="mb-3 row">
 					<label for="sellingStartDate" class="col-form-label col-sm-4">販售開始日期</label>
 					<input type="date" class="col-form-control col-sm-8"
-						id="sellingStartDate" v-model="sellingStartDate" />
+						id="sellingStartDate" v-model="sellingStartDate"
+						@blur="checkSellingStartDate()" /> <span id="" class="form-text"
+						style="color: red">{{sellingStartDateMessage}}</span>
 				</div>
 
 				<div class="mb-3 row">
 					<label for="sellingStopDate" class="col-form-label col-sm-4">販售停止日期</label>
 					<input type="date" class="col-form-control col-sm-8"
-						id="sellingStopDate" v-model="sellingStopDate" />
+						id="sellingStopDate" v-model="sellingStopDate"
+						@blur="checkSellingEndDate()" /> <span id="" class="form-text"
+						style="color: red"
+						v-if="sellingEndDateMessage!=''&&sellingDateMessage!=''">
+						1.{{sellingEndDateMessage}}<br>2.{{sellingDateMessage}}
+					</span> <span id="" class="form-text" style="color: red"
+						v-if="sellingEndDateMessage==''&&sellingDateMessage!=''">
+						{{sellingDateMessage}}</span> <span id="" class="form-text"
+						style="color: red"
+						v-if="sellingEndDateMessage!=''&&sellingDateMessage==''">
+						{{sellingEndDateMessage}}</span>
+
+
 				</div>
 
 				<div class="mb-3 row">
 					<label for="discountStartDate" class="col-form-label col-sm-4">優惠期間開始日期</label>
 					<input type="date" class="col-form-control col-sm-8"
-						id="discountStartDate" v-model="discountStartDate" />
+						id="discountStartDate" v-model="discountStartDate"
+						@blur="checkDiscountStartDate()" /> 
+						<span id="" class="form-text"
+						style="color: red">
+						{{discountSellingStartDateMessage}}</span>
 				</div>
 
 				<div class="mb-3 row">
 					<label for="discountEndDate" class="col-form-label col-sm-4">優惠期間結束日期</label>
 					<input type="date" class="col-form-control col-sm-8"
-						id="discountEndDate" v-model="discountEndDate" />
+						id="discountEndDate" v-model="discountEndDate" @blur="checkDiscountStopDate()"/>
+						
+						 <span id="" class="form-text"
+						style="color: red"
+						v-if="discountDateMessage!=''&&discountSellingStopDateMessage!=''">
+						1.{{discountSellingStopDateMessage}}<br>2.{{discountDateMessage}}
+					</span> <span id="" class="form-text" style="color: red"
+						v-if="discountDateMessage==''&&discountSellingStopDateMessage!=''">
+						{{discountSellingStopDateMessage}}</span> <span id="" class="form-text"
+						style="color: red"
+						v-if="discountDateMessage!=''&&discountSellingStopDateMessage==''">
+						{{discountDateMessage}}</span>
 				</div>
 
 				<div class="mb-3 row">

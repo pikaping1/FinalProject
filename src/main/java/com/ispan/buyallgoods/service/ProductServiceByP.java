@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ispan.buyallgoods.model.ContractsBean;
 import com.ispan.buyallgoods.model.Product;
@@ -69,6 +70,9 @@ public class ProductServiceByP {
 				}
 				return "找不到此商品，請再次確認內容!!";
 	}
+	
+
+	
 	
 	
 }

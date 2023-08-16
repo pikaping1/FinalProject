@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ispan.buyallgoods.model.ContractsBean;
+import com.ispan.buyallgoods.model.Product;
 import com.ispan.buyallgoods.model.SuppliersBean;
 import com.ispan.buyallgoods.service.ContractsService;
 
@@ -59,6 +60,12 @@ public class ContractsController {
 	@DeleteMapping("/deleteContracts/{contractsId}")
 	public String deleteContracts(@PathVariable Integer contractsId) {
 		return cSer.deleteById(contractsId);
+	}
+	
+	//用合約ID找對應的合約資料--for日期邏輯
+	@PostMapping("/findProdustByCId")
+	public ContractsBean findProdustByCId(@RequestBody Product product){
+		return cSer.findById(product.getContractsId());
 	}
 
 }
