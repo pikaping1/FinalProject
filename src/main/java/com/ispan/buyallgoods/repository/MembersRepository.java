@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.ispan.buyallgoods.repository;
 
 import java.util.List;
@@ -25,5 +22,8 @@ public interface MembersRepository extends JpaRepository<Members, Integer> {
 			+ "user_name as userName,first_name as firstName,"
 			+ "last_name as lastName from members where role_id=2 and members_id = :membersId and expiration_date is NULL ")
 	List<Object> getOneByMemberId(Integer membersId);
+	
+	//用帳號去找資料
+	Members findByUserName(String userName);
 	
 }

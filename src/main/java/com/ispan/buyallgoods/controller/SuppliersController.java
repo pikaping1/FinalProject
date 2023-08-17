@@ -22,6 +22,8 @@ import com.ispan.buyallgoods.repository.SuppliersRepository;
 import com.ispan.buyallgoods.service.SuppliersSrevice;
 import com.ispan.buyallgoods.tools.SuppliersContractsOthers;
 
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping(path = "/suppliers")
 public class SuppliersController {
@@ -87,7 +89,7 @@ public class SuppliersController {
 
 	// 查詢頁面的查詢全部
 	@PostMapping("/findAllSC")
-	public ResponseEntity<List<Map<String, Object>>> findAllSC() {
+	public ResponseEntity<List<Map<String, Object>>> findAllSC(HttpSession session) {
 		List<Object> scView = sSre.findAllSCToView();
 		if (scView == null) {
 			return null;

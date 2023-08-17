@@ -57,7 +57,10 @@ public class PageController {
 	    return "contracts/contracts_details_for_view_to_add";
 	}
 	
-	
+	@RequestMapping("/goLogin")
+	public String goLogin() {
+	    return "members/login";
+	}
 	
 	
 	//正融
