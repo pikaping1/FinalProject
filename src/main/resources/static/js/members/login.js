@@ -28,13 +28,10 @@ const app = Vue.createApp({
           if (result === true) {
             localStorage.setItem('UserName', response.data.members.userName);
             localStorage.setItem('MembersId', response.data.members.membersId);
+            localStorage.setItem('RoleId', response.data.members.roleId);
             let memberName=response.data.members.firstName+response.data.members.lastName
             localStorage.setItem('MemberName', memberName);
             
-            console.log("UserName",localStorage.getItem("UserName"))
-            console.log("MembersId",localStorage.getItem("MembersId"))
-            console.log("MemberName",localStorage.getItem("MemberName"))
-
             bootbox.alert({
               title: "提醒！",
               message:
