@@ -17,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ispan.buyallgoods.model.Members;
 import com.ispan.buyallgoods.model.SuppliersBean;
 import com.ispan.buyallgoods.repository.SuppliersRepository;
 import com.ispan.buyallgoods.service.SuppliersSrevice;
 import com.ispan.buyallgoods.tools.SuppliersContractsOthers;
-
-import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping(path = "/suppliers")
@@ -89,7 +88,7 @@ public class SuppliersController {
 
 	// 查詢頁面的查詢全部
 	@PostMapping("/findAllSC")
-	public ResponseEntity<List<Map<String, Object>>> findAllSC(HttpSession session) {
+	public ResponseEntity<List<Map<String, Object>>> findAllSC() {
 		List<Object> scView = sSre.findAllSCToView();
 		if (scView == null) {
 			return null;
@@ -152,10 +151,35 @@ public class SuppliersController {
 
 	}
 
-	// 測試分頁
+	// 分頁--全部
 	@GetMapping("/findAllSCPage")
 	public ResponseEntity<List<Map<String, Object>>> findAllSCPage(@RequestParam("offset") int offset) {
 		List<Object> scViewPage = sSre.findAllSCToViewPage(offset);
+		if (scViewPage == null) {
+			return null;
+		}
+		List<Map<String, Object>> result = new ArrayList<>();
+		for (Object obj : scViewPage) {
+			if (obj instanceof Object[]) {
+				Object[] row = (Object[]) obj;
+				Map<String, Object> map = new HashMap<>();
+				map.put("suppliersId", row[0]);
+				map.put("suppliersName", row[1]);
+				map.put("contractsId", row[2]);
+				map.put("contractnumber", row[3]);
+				map.put("suppliersEndDate", row[4]);
+				map.put("contractsEndDate", row[5]);
+				result.add(map);
+			}
+		}
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	
+	
+	// 分頁--By廠商ID
+	@GetMapping("/findSomeSCPage")
+	public ResponseEntity<List<Map<String, Object>>> findSomeSCPage(@RequestParam("suppliersId") int suppliersId,@RequestParam("offset") int offset) {
+		List<Object> scViewPage = sSre.findSomeAllSCToViewPage(suppliersId,offset);
 		if (scViewPage == null) {
 			return null;
 		}
@@ -196,6 +220,13 @@ public class SuppliersController {
 		}
 
 		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	
+	//用會員代號找廠商
+	@PostMapping("/findSupplier")
+	public SuppliersBean findSupplier(@RequestBody Members members) {
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+members.toString());
+		return sSre.findSByMId(members);
 	}
 
 }

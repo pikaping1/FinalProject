@@ -28,25 +28,66 @@ const app = Vue.createApp({
 
       tomorrowDate: tomorrow,
       todayDate: new Date(),
+
+      
     };
   },
   computed: {},
   methods: {
     //分頁查詢
     callFindAllSCPage: function (offset) {
+      this.callFindAllSuppliers();
       this.isShowPage = true;
       let pika = this;
+      let userRoleId = localStorage.getItem("RoleId");
 
-      axios
-        .get(contextPath + "/suppliers/findAllSCPage?offset=" + offset)
-        .then(function (response) {
-          pika.pageCount = response.data;
-          pika.suppliersData = response.data;
-        })
-        .catch(function () {})
-        .finally(function () {
-          pika.callCountAllSC();
-        });
+      if (userRoleId === "1") {
+        axios
+          .get(contextPath + "/suppliers/findAllSCPage?offset=" + offset)
+          .then(function (response) {
+            pika.pageCount = response.data;
+            pika.suppliersData = response.data;
+          })
+          .catch(function () {})
+          .finally(function () {
+            pika.callCountAllSC();
+          });
+      } else if (userRoleId === "2") {
+        pika.isShowPage = false;
+        let localStorageMembersId = localStorage.getItem("MembersId");
+        console.log("localStorageMembersId", localStorageMembersId);
+        let request = {
+          membersId: localStorageMembersId,
+        };
+        console.log("request", request);
+
+        let pulu = pika;
+        axios
+          .post(contextPath + "/suppliers/findSupplier", request)
+          .then(function (response) {
+            console.log(response);
+            let vm = pulu;
+            let suppliersId = response.data.suppliersId;
+            axios
+              .get(
+                contextPath +
+                  "/suppliers/findSomeSCPage?offset=" +
+                  offset +
+                  "&suppliersId=" +
+                  suppliersId
+              )
+              .then(function (response2) {
+                vm.pageCount = response2.data;
+                vm.suppliersData = response2.data;
+              })
+              .catch(function () {})
+              .finally(function () {
+                vm.callCountAllSC();
+              });
+          })
+          .catch(function () {})
+          .finally(function () {});
+      }
     },
 
     //計算總共有幾頁
@@ -88,7 +129,7 @@ const app = Vue.createApp({
 
     //進入畫面先查詢全部的資料
     callFindSC: function () {
-      let pika = this;
+      console.log("userRoleId", userRoleId);
       axios
         .post(contextPath + "/suppliers/findAllSC")
         .then(function (response) {
@@ -231,8 +272,7 @@ const app = Vue.createApp({
     },
   },
   mounted: function () {
-    this.callFindSC();
-    this.callFindAllSuppliers();
+    // this.callFindSC();
     this.offset = 0;
     this.callFindAllSCPage(this.offset);
   },

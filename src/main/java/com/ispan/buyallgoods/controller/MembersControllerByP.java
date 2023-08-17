@@ -68,4 +68,5 @@ public class MembersControllerByP {
 		return mSer.findByUserName(members);
 	}
 
+	
 }

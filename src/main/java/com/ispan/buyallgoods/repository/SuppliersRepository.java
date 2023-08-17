@@ -27,6 +27,15 @@ public interface SuppliersRepository extends JpaRepository<SuppliersBean, Intege
 		    + "ORDER BY s.suppliers_id "  // 可以根据需要指定排序字段
 		    + "OFFSET :offset ROWS FETCH NEXT 5 ROWS ONLY")
 		List<Object> getSCViewWithPagination(int offset);
+	
+	
+	//分頁
+		@Query(nativeQuery = true, value = "SELECT s.suppliers_id, s.suppliers_name, c.contracts_id, c.contract_number, s.contract_end_date,c.end_date "
+			    + "FROM suppliers AS s "
+			    + "LEFT JOIN contracts AS c ON s.suppliers_id = c.suppliers_id where s.suppliers_id=:suppliersId "
+			    + "ORDER BY s.suppliers_id "  // 可以根据需要指定排序字段
+			    + "OFFSET :offset ROWS FETCH NEXT 5 ROWS ONLY")
+			List<Object> getSCViewWithPaginationWhere(int suppliersId,int offset);
 
 	
 	//計算兩個表的總資料數
@@ -34,6 +43,8 @@ public interface SuppliersRepository extends JpaRepository<SuppliersBean, Intege
 	        + "LEFT JOIN contracts AS c ON s.suppliers_id = c.suppliers_id")
 	Integer getSCCount();
 
+	//用會員代號找廠商
+	SuppliersBean findByMembersId(Integer membersId);
 
 }
 	
