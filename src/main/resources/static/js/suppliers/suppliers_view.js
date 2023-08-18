@@ -25,12 +25,12 @@ const app = Vue.createApp({
       offset2: "",
       findOffset: "",
 
-      isShowPage: true,
+      isShowPage: false,
 
       tomorrowDate: tomorrow,
       todayDate: new Date(),
 
-      isShowSearch:true,
+      isShowSearch:false,
       
     };
   },
@@ -40,13 +40,14 @@ const app = Vue.createApp({
     callFindAllSCPage: function (offset) {
       this.callFindAllSuppliers();
       this.callFindAllContracts();
-      this.isShowPage = true;
-      this.isShowSearch=true;
+      this.isShowPage = false;
+      this.isShowSearch=false;
       let pika = this;
       let userRoleId = localStorage.getItem("RoleId");
 
       if (userRoleId === "1") {
-
+        this.isShowPage = true;
+        this.isShowSearch=true;
         axios
           .get(contextPath + "/suppliers/findAllSCPage?offset=" + offset)
           .then(function (response) {
