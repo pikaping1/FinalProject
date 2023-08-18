@@ -23,7 +23,7 @@
 		<div class="container">
 			<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~table上方條件輸入框~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-			<div>
+			<div v-show="isShowSearch">
 				<!-- 廠商ID輸入框 -->
 				<div class="row">
 					<div class="col">

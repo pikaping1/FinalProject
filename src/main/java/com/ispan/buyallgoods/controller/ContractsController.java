@@ -3,6 +3,8 @@ package com.ispan.buyallgoods.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,16 @@ public class ContractsController {
 
 	@Autowired
 	private ContractsService cSer;
+
+	// 查詢全部(create by Rong)
+	@PostMapping("/findAllContracts")
+	public ResponseEntity<List<ContractsBean>> findAllSuppliers() {
+		List<ContractsBean> findAll = cSer.findAll();
+		if (findAll == null) {
+			return null;
+		}
+		return new ResponseEntity<>(findAll, HttpStatus.OK);
+	}
 
 	// 查詢byID
 	@GetMapping("/findByContractsId/{contractsId}")
@@ -61,10 +73,10 @@ public class ContractsController {
 	public String deleteContracts(@PathVariable Integer contractsId) {
 		return cSer.deleteById(contractsId);
 	}
-	
-	//用合約ID找對應的合約資料--for日期邏輯
+
+	// 用合約ID找對應的合約資料--for日期邏輯
 	@PostMapping("/findProdustByCId")
-	public ContractsBean findProdustByCId(@RequestBody Product product){
+	public ContractsBean findProdustByCId(@RequestBody Product product) {
 		return cSer.findById(product.getContractsId());
 	}
 

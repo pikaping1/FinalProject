@@ -29,6 +29,7 @@ const app = Vue.createApp({
       tomorrowDate: tomorrow,
       todayDate: new Date(),
 
+      isShowSearch:true,
       
     };
   },
@@ -38,10 +39,12 @@ const app = Vue.createApp({
     callFindAllSCPage: function (offset) {
       this.callFindAllSuppliers();
       this.isShowPage = true;
+      this.isShowSearch=true;
       let pika = this;
       let userRoleId = localStorage.getItem("RoleId");
 
       if (userRoleId === "1") {
+
         axios
           .get(contextPath + "/suppliers/findAllSCPage?offset=" + offset)
           .then(function (response) {
@@ -54,6 +57,7 @@ const app = Vue.createApp({
           });
       } else if (userRoleId === "2") {
         pika.isShowPage = false;
+        pika.isShowSearch=false;
         let localStorageMembersId = localStorage.getItem("MembersId");
         console.log("localStorageMembersId", localStorageMembersId);
         let request = {
@@ -267,8 +271,21 @@ const app = Vue.createApp({
 
     //如果廠商沒有合約資料，就顯示新增，帶到專屬廠商的合約新增畫面
     callGoAddContracts: function (suppliersId) {
-      const url = contextPath + "/goAddContracts?suppliersId=" + suppliersId;
-      window.location.href = url;
+      let roleId=localStorage.getItem("RoleId")
+      if(roleId==='1'){
+        const url = contextPath + "/goAddContracts?suppliersId=" + suppliersId;
+        window.location.href = url;
+      }else{
+        bootbox.alert({
+          title: "提醒！",
+          message:
+            '<div class="text-center">如合約尚未登錄，請聯繫管理員協助登錄，謝謝！</div>',
+          buttons: {
+            ok: { label: "關閉", className: "btn btn-warning" },
+          },
+        });
+      }
+      
     },
   },
   mounted: function () {

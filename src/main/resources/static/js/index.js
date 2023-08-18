@@ -173,6 +173,7 @@ const index = Vue.createApp({
           contextPath + "/product-singlePage?productsId=" + productsId;
       },
 
+
   },
   mounted: function () {
     this.selectAllcategories();

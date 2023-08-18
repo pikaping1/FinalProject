@@ -13,7 +13,7 @@
 
   </head>
 
-  <body style="padding-top: 8%;" >
+  <body style="padding-top: 8%;">
     
       <%@ include file="/WEB-INF/views/toolbar/navbar.jsp" %>
     <div class="container" >
@@ -259,4 +259,6 @@
   type="text/javascript"
   src="<c:url value='/js/index.js'></c:url>"
 ></script>
+
+
 </html>

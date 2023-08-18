@@ -134,11 +134,11 @@
 
 		<div style="text-align: center; margin-top: 10px; margin-bottom: 10px">
 			<button class="btn btn-outline-success mx-5"
-				@click="callAddContractsToUpdate()">編輯</button>
+				@click="callAddContractsToUpdate()" v-show="isShowEditBtn">編輯</button>
 			<a href="<c:url value="/showSupplierPage"></c:url>"><button
 					class="btn btn-outline-dark mx-5">回查詢頁</button></a>
 			<button class="btn btn-outline-danger mx-5"
-				@click="callFinishContracts()">終止合約</button>
+				@click="callFinishContracts()" v-show="isShowEndBtn">終止合約</button>
 		</div>
 	</div>
 

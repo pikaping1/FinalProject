@@ -19,6 +19,16 @@ public class ContractsService {
 	@Autowired
 	private ContractsRepository cRepo;
 
+	// 查詢全部(create by Rong)
+	public List<ContractsBean> findAll() {
+		List<ContractsBean> findAll = cRepo.findAll();
+		// isEmpty檢查有沒有資料，true就是沒資料
+		if (findAll.isEmpty()) {
+			return null;
+		}
+		return findAll;
+	}
+
 	// 查詢1筆資料BY contractsId
 	public ContractsBean findById(Integer contractsId) {
 		Optional<ContractsBean> optional = cRepo.findById(contractsId);
@@ -77,13 +87,13 @@ public class ContractsService {
 
 	}
 
-	//用SuppliersId找所有對應合約，一鍵終止
+	// 用SuppliersId找所有對應合約，一鍵終止
 	public List<ContractsBean> finishBySId(SuppliersBean suppliers) {
 		List<ContractsBean> findAllBySuppliersId = cRepo.findAllBySuppliersId(suppliers.getSuppliersId());
-		
+
 		// isEmpty判斷List裡是不是空白，是的話回傳true
 		if (!findAllBySuppliersId.isEmpty()) {
-			//把每個資料迴圈跑出來，然後把EndDate押上昨天，並更新修改當下的系統時間
+			// 把每個資料迴圈跑出來，然後把EndDate押上昨天，並更新修改當下的系統時間
 			for (ContractsBean obj : findAllBySuppliersId) {
 				LocalDate today = LocalDate.now();
 				LocalDate yesterday = today.minusDays(1);
@@ -109,5 +119,5 @@ public class ContractsService {
 		return "刪除失敗";
 
 	}
-	
+
 }
