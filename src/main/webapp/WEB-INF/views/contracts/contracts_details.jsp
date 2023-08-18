@@ -13,8 +13,8 @@
 <style>
 </style>
 </head>
-<%@ include file="../toolbar/navbar.jsp"%>
 <body style="padding-top: 9%">
+<%@ include file="../toolbar/navbar.jsp"%>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~form~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 	<div class="container" id="app">

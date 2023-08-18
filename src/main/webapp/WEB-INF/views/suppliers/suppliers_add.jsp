@@ -11,11 +11,11 @@
 
 <title>廠商登錄</title>
 
-<%@ include file="../toolbar/navbar.jsp"%>
 <style>
 </style>
 </head>
 <body style="padding-top: 9%">
+<%@ include file="../toolbar/navbar.jsp"%>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~form~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 	<div class="container" id="app">
