@@ -76,7 +76,7 @@
 			<!-- 購物車圖示結束 -->
 
 			<!-- 後臺管理按鈕起始 (顯示給:管理員) -->
-			<div class="container-fluid">
+			<div class="container-fluid" id="supplier">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" role="button"
@@ -84,7 +84,7 @@
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item"
 								href="<c:url value='/product-list'/>">檢視商品</a></li>
-							<li><a class="dropdown-item"
+							<li v-show="isShowAddSupplier"><a class="dropdown-item"
 								href="<c:url value='/product-add'/>">新增商品</a></li>
 							<li><hr class="dropdown-divider" /></li>
 							<li><a class="dropdown-item"
@@ -92,12 +92,12 @@
 							<li><hr class="dropdown-divider" /></li>
 							<li><a class="dropdown-item"
 								href="<c:url value="/showSupplierPage"></c:url>">檢視廠商</a></li>
-							<li><a class="dropdown-item"
+							<li v-show="isShowAddSupplier"><a class="dropdown-item"
 								href="<c:url value="/showAddSupplierPage"></c:url>">新增廠商</a></li>
 							<li><hr class="dropdown-divider" /></li>
 							<li><a class="dropdown-item"
 								href="<c:url value="/showSupplierPage"></c:url>">檢視合約</a></li>
-							<li><a class="dropdown-item"
+							<li v-show="isShowAddContracts"><a class="dropdown-item"
 								href="<c:url value="/showAddContractsPage"></c:url>">新增合約</a></li>
 							<li><hr class="dropdown-divider" /></li>
 							<li><a class="dropdown-item" href="#">檢視會員</a></li>
@@ -111,7 +111,9 @@
 	<!-- 上方工具列結束 -->
 </div>
 
-
-
+  <script
+  type="text/javascript"
+  src="<c:url value='/js/toolbar/navbar.js'></c:url>"
+></script>
 <!-- </body> -->
 <!-- </html> -->
