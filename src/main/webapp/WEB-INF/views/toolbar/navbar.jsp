@@ -41,7 +41,7 @@
 
 		<div class="dropdown d-flex">
 			<!-- 會員登入/登出/個人資訊起始 -->
-			<div class="container">
+			<div class="container" id="supplier">
 				<a href="#"
 					class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
 					id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -54,9 +54,9 @@
 					<li><a class="dropdown-item" href="#">收藏清單</a></li>
 					<li><a class="dropdown-item" href="#">訂單查詢</a></li>
 					<li><hr class="dropdown-divider" /></li>
-					<li><a class="dropdown-item"
-						href="<c:url value="goLogin"></c:url>">登出</a></li>
-
+					<li v-show="isShowLogin"><a class="dropdown-item"
+						href="<c:url value="goLogin"></c:url>">登入</a></li>
+					<li v-show="isShowLogout"><button class="dropdown-item" @click="logout">登出</button></li>
 
 				</ul>
 			</div>
@@ -111,9 +111,7 @@
 	<!-- 上方工具列結束 -->
 </div>
 
-  <script
-  type="text/javascript"
-  src="<c:url value='/js/toolbar/navbar.js'></c:url>"
-></script>
+<script type="text/javascript"
+	src="<c:url value='/js/toolbar/navbar.js'></c:url>"></script>
 <!-- </body> -->
 <!-- </html> -->
