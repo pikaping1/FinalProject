@@ -13,11 +13,11 @@
 <style>
 </style>
 </head>
+<body style="padding-top: 9%">
 <%@ include file="../toolbar/navbar.jsp"%>
-<body style="padding-top: 9%" id="app">
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~form~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-	<div class="container">
+	<div class="container" id="app">
 		<p style="font-size: 30px; text-align: center; margin-bottom: 10px">
 			廠商明細</p>
 		<p style="font-size: 14px; text-align: center; margin-bottom: 10px ;color:red">

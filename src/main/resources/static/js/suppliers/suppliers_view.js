@@ -16,6 +16,7 @@ const app = Vue.createApp({
 
       suppliersData: [],
       suppliersAllData: [],
+      contractsAllData:[],
 
       chooseSuppliersId: null,
 
@@ -38,6 +39,7 @@ const app = Vue.createApp({
     //分頁查詢
     callFindAllSCPage: function (offset) {
       this.callFindAllSuppliers();
+      this.callFindAllContracts();
       this.isShowPage = true;
       this.isShowSearch=true;
       let pika = this;
@@ -126,6 +128,18 @@ const app = Vue.createApp({
         .post(contextPath + "/suppliers/findAllSuppliers")
         .then(function (response) {
           pika.suppliersAllData = response.data;
+        })
+        .catch(function () {})
+        .finally(function () {});
+    },
+
+    //查詢全部的合約有哪些，for合約編號的填寫欄位
+    callFindAllContracts: function () {
+      let pika = this;
+      axios
+        .post(contextPath + "/contracts/findAllContracts")
+        .then(function (response) {
+          pika.contractsAllData = response.data;
         })
         .catch(function () {})
         .finally(function () {});

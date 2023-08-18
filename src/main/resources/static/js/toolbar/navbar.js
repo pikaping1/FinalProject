@@ -41,6 +41,7 @@ const supplier = Vue.createApp({
       }
     },
     logout: function () {
+      console.log("登出!!!!!!!!!!!!")
       bootbox.confirm({
         title: "再次確認！",
         message: '<div class="text-center">' + "確定要登出嗎？" + "</div>",
@@ -65,7 +66,8 @@ const supplier = Vue.createApp({
                 ok: { label: "關閉", className: "btn btn-warning" },
               },
               callback: function () {
-                window.location.href = "/buyallgoods/";
+                const url = contextPath + "/";
+                window.location.href = url;
               },
             });
           } else {

@@ -29,10 +29,10 @@ legend {
 </head>
 <%@ include file="../toolbar/navbar.jsp"%>
 
-<body style="padding-top: 9%" id="app">
+<body style="padding-top: 9%">
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~form~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-	<div class="container">
+	<div class="container" id="app">
 		<p style="font-size: 30px; text-align: center; margin-bottom: 10px">
 			合約登錄</p>
 		<!--欄位1-->
