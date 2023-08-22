@@ -61,12 +61,12 @@
 					<!-- 合約ID輸入框 -->
 					<div class="col">
 						<div class="input-group mb-3">
-							<span class="input-group-text" id="inputGroup-sizing-default">合約ID</span>
+							<span class="input-group-text" id="inputGroup-sizing-default">合約編號</span>
 
 							<select class="form-select" aria-label="Default select example"
 								style="width: 200px" v-model="findContractsId"
 								v-on:blur="callFindSomeSC()">
-								<option selected :value="">[請選擇廠商名稱]</option>
+								<option selected :value="">[請選擇合約編號]</option>
 								<!-- 								~~~~~~~~~~~~~~~~~~用迴圈~~~~~~~~~~~~~~~~~~ -->
 								<option v-for="c in contractsAllData" v-bind:key="c.contractsId"
 									:value="c.contractsId">{{c.contractNumber}}</option>
