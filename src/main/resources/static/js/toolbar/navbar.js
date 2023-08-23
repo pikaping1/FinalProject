@@ -6,16 +6,17 @@ const supplier = Vue.createApp({
   components: {},
   data: function () {
     return {
-      isShowAddSupplier: false,
-      isShowAddContracts: false,
-
+      isShowAddSupplier: true,
+      isShowAddContracts: true,
+      isShowLogin: true,
+      isShowLogout: false,
     };
   },
   computed: {},
   methods: {
     goAddSuppliers: function () {
       let roleId = localStorage.getItem("RoleId");
-      if (roleId === '1') {
+      if (roleId == "1") {
         this.isShowAddSupplier = true;
       } else {
         this.isShowAddSupplier = false;
@@ -23,37 +24,13 @@ const supplier = Vue.createApp({
     },
     goAddContracts: function () {
       let roleId = localStorage.getItem("RoleId");
-      if (roleId === '1') {
+      if (roleId == "1") {
         this.isShowAddContracts = true;
       } else {
         this.isShowAddContracts = false;
       }
     },
-    
-  },
-  mounted: function () {
-    this.goAddSuppliers();
-    this.goAddContracts();
-  },
-});
-
-supplier.mount("#supplier");
-
-/**
- *
- */
-
-const login = Vue.createApp({
-  components: {},
-  data: function () {
-    return {
-      isShowLogin: true,
-      isShowLogout: false,
-    };
-  },
-  computed: {},
-  methods: {
-      goLogin: function () {
+    goLogin: function () {
       let userName = localStorage.getItem("UserName");
       if (userName === null) {
         this.isShowLogin = true;
@@ -100,9 +77,12 @@ const login = Vue.createApp({
     },
   },
   mounted: function () {
+    this.goAddSuppliers();
+    this.goAddContracts();
     this.goLogin();
 
+    console.log("navbar.js載入");
   },
 });
 
-login.mount("#login");
+supplier.mount("#supplier");
